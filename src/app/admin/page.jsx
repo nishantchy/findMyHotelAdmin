@@ -1,6 +1,11 @@
+"use client";
 import Link from "next/link";
 
-export default function AdminHome() {
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
+const AdminHome = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <h1 className="text-3xl font-bold text-gray-900 mb-6">Admin Panel</h1>
@@ -35,13 +40,28 @@ export default function AdminHome() {
         >
           Hotels
         </Link>
-        {/* <Link
-          href="/admin/offers"
-          className="block text-lg text-primary hover:underline"
-        >
-          Offers
-        </Link> */}
       </nav>
     </div>
   );
-}
+};
+
+const withAuth = (Component) => {
+  return (props) => {
+    const { isSignedIn } = useUser();
+    const router = useRouter();
+
+    useEffect(() => {
+      if (!isSignedIn) {
+        router.push("/");
+      }
+    }, [isSignedIn, router]);
+
+    if (!isSignedIn) {
+      return <p>Please login to continue</p>;
+    }
+
+    return <Component {...props} />;
+  };
+};
+
+export default withAuth(AdminHome);
