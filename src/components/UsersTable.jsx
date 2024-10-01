@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default async function UsersList() {
   // const users = [
   //   { id: 1, name: "John Doe", email: "john@example.com", role: "User" },
@@ -14,27 +16,33 @@ export default async function UsersList() {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Image
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Name
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Email
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Image
+                Email Address
               </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {users.map((user) => (
               <tr key={user.id}>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <Image
+                    src={user.imageUrl}
+                    width={50}
+                    height={50}
+                    alt={user.firstName}
+                    style={{ borderRadius: "50px" }}
+                  />
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  {user.name}
+                  {user.firstName} {user.lastName}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {user.email}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {user.role}
+                  {user.emailAddress}
                 </td>
               </tr>
             ))}

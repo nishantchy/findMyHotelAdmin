@@ -1,20 +1,4 @@
-import { useState } from "react";
-
 export default function OffersManagement() {
-  const [hotels, setHotels] = useState([
-    { id: 1, name: "Luxury Hotel", featured: false },
-    { id: 2, name: "Seaside Resort", featured: true },
-    // Add more hotel data as needed
-  ]);
-
-  const toggleFeatured = (id) => {
-    setHotels(
-      hotels.map((hotel) =>
-        hotel.id === id ? { ...hotel, featured: !hotel.featured } : hotel
-      )
-    );
-  };
-
   return (
     <div>
       <h1 className="text-2xl font-semibold text-gray-900 mb-6">
@@ -36,7 +20,7 @@ export default function OffersManagement() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {hotels.map((hotel) => (
+            {/* {hotels.map((hotel) => (
               <tr key={hotel.id}>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   {hotel.name}
@@ -59,7 +43,7 @@ export default function OffersManagement() {
                   </button>
                 </td>
               </tr>
-            ))}
+            ))} */}
           </tbody>
         </table>
       </div>

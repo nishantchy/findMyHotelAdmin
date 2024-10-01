@@ -1,35 +1,18 @@
-export default function TrackOrders() {
-  const orders = [
-    {
-      id: 1,
-      user: "John Doe",
-      hotel: "Luxury Hotel",
-      checkIn: "2023-07-25",
-      checkOut: "2023-07-30",
-      status: "Confirmed",
-    },
-    {
-      id: 2,
-      user: "Jane Smith",
-      hotel: "Seaside Resort",
-      checkIn: "2023-08-01",
-      checkOut: "2023-08-05",
-      status: "Pending",
-    },
-    // Add more order data as needed
-  ];
+export default async function TrackOrders() {
+  let data = await fetch("http://localhost:8000/api/bookings");
+  let bookings = await data.json();
 
   return (
     <div>
       <h1 className="text-2xl font-semibold text-gray-900 mb-6">
-        Track Orders
+        Track Bookings
       </h1>
       <div className="bg-white shadow overflow-hidden sm:rounded-lg">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Order ID
+                Booking ID
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 User
@@ -38,10 +21,10 @@ export default function TrackOrders() {
                 Hotel
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Check-in
+                Check-in Date
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Check-out
+                Check-out Date
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Status
@@ -49,32 +32,28 @@ export default function TrackOrders() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {orders.map((order) => (
-              <tr key={order.id}>
+            {bookings.map((booking) => (
+              <tr key={booking._id}>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  {order.id}
+                  {booking._id}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {order.user}
+                  {booking.user.firstName} {booking.user.lastName}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {order.hotel}
+                  {booking.hotelName}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {order.checkIn}
+                  {booking.checkInDate}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {order.checkOut}
+                  {booking.checkOutDate}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   <span
-                    className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      order.status === "Confirmed"
-                        ? "bg-green-100 text-green-800"
-                        : "bg-yellow-100 text-yellow-800"
-                    }`}
+                    className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800`}
                   >
-                    {order.status}
+                    Confirmed
                   </span>
                 </td>
               </tr>

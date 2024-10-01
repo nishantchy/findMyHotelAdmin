@@ -18,17 +18,23 @@ const data = [
   { name: "Jun", userTraffic: 2390, totalEarnings: 3800, bookings: 2500 },
 ];
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const response = await fetch("http://localhost:8000/api/hotels");
+  const hotels = await response.json();
+
+  const usersResponse = await fetch("http://localhost:8000/api/users");
+  const users = await usersResponse.json();
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <DashboardCard title="Total Hotels" value="120" />
-        <DashboardCard title="Total Bookings" value="1,234" />
-        <DashboardCard title="Total Users" value="5,678" />
+        <DashboardCard title="Total Hotels" value={hotels.length} />
+        <DashboardCard title="Total Bookings" value="1" />
+        <DashboardCard title="Total Users" value={users.length} />
       </div>
-      <div className="bg-white p-4 rounded-lg shadow">
-        <h2 className="text-xl font-semibold mb-4">Analytics</h2>
-        {/* <ResponsiveContainer width="100%" height={300}>
+
+      {/* <div className="bg-white p-4 rounded-lg shadow"> */}
+      {/* <h2 className="text-xl font-semibold mb-4">Analytics</h2> */}
+      {/* <ResponsiveContainer width="100%" height={300}>
             <BarChart data={data}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
@@ -40,7 +46,7 @@ export default function Dashboard() {
               <Bar dataKey="bookings" fill="#ffc658" />
             </BarChart>
           </ResponsiveContainer> */}
-      </div>
+      {/* </div> */}
     </div>
   );
 }

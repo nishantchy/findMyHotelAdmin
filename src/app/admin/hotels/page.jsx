@@ -1,5 +1,5 @@
 import HotelsList from "../../../components/HotelsList";
 
-export default function HotelsPage() {
+export default async function HotelsPage() {
   return <HotelsList />;
 }
