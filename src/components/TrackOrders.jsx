@@ -7,7 +7,7 @@ export default async function TrackOrders() {
       <h1 className="text-2xl font-semibold text-gray-900 mb-6">
         Track Bookings
       </h1>
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div className="bg-white shadow overflow-x-scroll sm:rounded-lg">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -38,7 +38,7 @@ export default async function TrackOrders() {
                   {booking._id}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {booking.user.firstName} {booking.user.lastName}
+                  {booking.user}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {booking.hotelName}
